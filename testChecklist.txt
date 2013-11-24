@@ -3,7 +3,7 @@ OK - HttpDownloader has to constructors: (String host, int port) and (String hos
 OK - If we don't pass port parameter to constructor 80 is set by default.
 OK - HttpDownloader has setter and getter for host
 OK - HttpDownloader has setter and getter for port
-HttpDownloader has method download
-Method download takes one String argument or none
+OK - HttpDownloader has method download
+OK - Method download takes one String argument or none
 If we pass one String to method download then file with filename is created.
 If cannot create file "filename" then throws IOException
