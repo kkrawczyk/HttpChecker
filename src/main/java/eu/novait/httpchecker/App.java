@@ -89,6 +89,18 @@ public class App {
             }
         }
     }
+    
+    public void exitWithNagiosCode(){
+        Iterator<CheckHandler> it = this.checkHandlers.iterator();
+        int returnCode = App.STATUS_OK;
+        while(it.hasNext()){
+            CheckHandler ch = it.next();
+            if (ch.getStatusCode() < 200 || ch.getStatusCode() >= 400) {
+                returnCode = App.STATUS_CRITICAL;
+            }
+        }
+        System.exit(returnCode);
+    }
 
     public static void main(String[] args) {
         App app = new App();
