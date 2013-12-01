@@ -1,19 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eu.novait.httpchecker.utils;
 
 import eu.novait.httpchecker.utils.handlers.CheckHandler;
 import java.util.Iterator;
 
 /**
+ * Output formater to returns response in nagios format. It can be used as a
+ * nagios plugin.
  *
- * @author kkrawczyk
+ * @author Krzysztof Krawczyk
  */
 public class NagiosOutputFormatter extends OutputFormatter {
 
+    /**
+     * Implemented method of abstract class. It format checkHandler in nagios
+     * plugin format.
+     */
     @Override
     public void printOutput() {
         Iterator<CheckHandler> it = this.getCheckHandlersIterator();
@@ -36,8 +37,8 @@ public class NagiosOutputFormatter extends OutputFormatter {
                 longservieoutput += System.lineSeparator();
             }
         }
-        if(faultSites>0){
-            mainStatus = "WARNING! "+Integer.toString(faultSites)+" sites are unaccessible!";
+        if (faultSites > 0) {
+            mainStatus = "WARNING! " + Integer.toString(faultSites) + " sites are unaccessible!";
         }
         System.out.println(mainStatus);
         System.out.print(longservieoutput);

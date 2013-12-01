@@ -6,8 +6,23 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * Class to load url list from file
+ *
+ * @author Krzysztof Krawczyk
+ */
 public class FileUrlProvider extends UrlProvider {
 
+    /**
+     * Default constructor.
+     *
+     * Loads urls from file defined in f param. Each URL has to be in separate
+     * line
+     *
+     * @param f Source file
+     * @throws FileNotFoundException throwed if f file doesn't exists
+     * @throws IOException throwed on any exception during file read
+     */
     public FileUrlProvider(File f) throws FileNotFoundException, IOException {
         super();
         if (!f.exists()) {

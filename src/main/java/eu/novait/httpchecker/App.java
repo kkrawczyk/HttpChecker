@@ -19,7 +19,7 @@ import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.ParseException;
 
 /**
- * Hello world!
+ * Application main class.
  *
  */
 public class App {
@@ -33,20 +33,38 @@ public class App {
     private ArrayList<CheckHandler> checkHandlers;
     private ArrayList<String> urlsToProcess;
 
+    /**
+     * Default constructor. Sets up inner parameters.
+     */
     public App() {
         this.outputFormatters = new ArrayList<>();
         this.checkHandlers = new ArrayList<>();
         this.urlsToProcess = new ArrayList<>();
     }
 
+    /**
+     * Method to add OutputFormatter to application
+     *
+     * @param outputFormatter OutputFormatter to add
+     */
     public void addOutputFormatter(OutputFormatter outputFormatter) {
         this.outputFormatters.add(outputFormatter);
     }
-    
-    public void addUrlToProcess(String url){
+
+    /**
+     * Method to add url to application
+     *
+     * @param url url to add
+     */
+    public void addUrlToProcess(String url) {
         this.urlsToProcess.add(url);
     }
 
+    /**
+     * Inner method to process single url.
+     *
+     * @param url url to process
+     */
     private void processUrl(String url) {
         HttpDownloader hd = new HttpDownloader(url);
         hd.setMethod(HttpDownloader.METHOD_GET);
@@ -60,15 +78,22 @@ public class App {
         );
         this.checkHandlers.add(ch);
     }
-    
-    public void processUrls(){
+
+    /**
+     * Firing urls processing
+     */
+    public void processUrls() {
         Iterator<String> it = this.urlsToProcess.iterator();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             String url = it.next();
             this.processUrl(url);
         }
     }
 
+    /**
+     * Firing processing output. It executing "printOutput" method on each
+     * OutputFormatter added to application
+     */
     public void processOutput() {
         this.prepareOutputFormatters();
         Iterator<OutputFormatter> it = this.outputFormatters.iterator();
@@ -78,6 +103,10 @@ public class App {
         }
     }
 
+    /**
+     * Inner method to prepare output formatters. Its adding CheckHandlers to
+     * each output formatter.
+     */
     private void prepareOutputFormatters() {
         Iterator<OutputFormatter> it = this.outputFormatters.iterator();
         while (it.hasNext()) {
@@ -128,12 +157,12 @@ public class App {
                         new File(cmd.getOptionValue("f"))
                 );
                 Iterator<String> it = fup.getIterator();
-                while(it.hasNext()){
+                while (it.hasNext()) {
                     String url = it.next();
                     app.addUrlToProcess(url);
                 }
             }
-            
+
             app.processUrls();
             app.processOutput();
 

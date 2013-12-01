@@ -9,6 +9,11 @@ import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
+/**
+ * Class to manage http connections.
+ *
+ * @author Krzysztof Krawczyk
+ */
 public class HttpDownloader {
 
     public static final int METHOD_GET = 0;
@@ -21,42 +26,84 @@ public class HttpDownloader {
     private BasicHttpResponseHandler response = null;
     private long responseTime = 0;
 
+    /**
+     * Constructor initializing host attribute
+     *
+     * @param host url to process
+     */
     public HttpDownloader(String host) {
         this.setPort(80);
         this.setHost(host);
     }
 
+    /**
+     * Constructor initializing host and port
+     *
+     * @param host url to process
+     * @param port url port to process
+     * @deprecated
+     */
     public HttpDownloader(String host, int port) {
         this.setPort(port);
         this.setHost(host);
     }
 
+    /**
+     * Returns url to process
+     *
+     * @return url to process
+     */
     public String getHost() {
         return host;
     }
 
+    /**
+     * Sets url to process
+     *
+     * @param host url to process
+     */
     public void setHost(String host) {
         this.host = host;
     }
 
+    /**
+     * Returns url port
+     *
+     * @return port
+     * @deprecated
+     */
     public int getPort() {
         return port;
     }
 
+    /**
+     * Sets port
+     *
+     * @param port
+     * @deprecated
+     */
     public void setPort(int port) {
         this.port = port;
     }
 
+    /**
+     * Downloads content under url
+     */
     public void download() {
         this.download(null);
     }
 
+    /**
+     * Downloads content under url and store it in a file
+     *
+     * @param filename output filename
+     */
     public void download(String filename) {
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        
+
         try {
             HttpRequestBase hrb = null;
-            switch(this.method){
+            switch (this.method) {
                 case HttpDownloader.METHOD_POST:
                     hrb = new HttpPost(this.host);
                 case HttpDownloader.METHOD_HEAD:
@@ -66,11 +113,11 @@ public class HttpDownloader {
                 default:
                     hrb = new HttpGet(this.host);
             }
-            this.setResponse(new BasicHttpResponseHandler());
+            this.response = new BasicHttpResponseHandler();
             long requestStart = System.currentTimeMillis();
             httpclient.execute(hrb, this.getResponse());
             long requestStop = System.currentTimeMillis();
-            this.setResponseTime(requestStop-requestStart);
+            this.responseTime = requestStop - requestStart;
             httpclient.close();
         } catch (IOException ex) {
         } finally {
@@ -78,44 +125,38 @@ public class HttpDownloader {
     }
 
     /**
-     * @return the method
+     * Returns method attribute
+     *
+     * @return method attribute
      */
     public int getMethod() {
         return method;
     }
 
     /**
-     * @param method the method to set
+     * Sets method attribute
+     *
+     * @param method method to set
      */
     public void setMethod(int method) {
         this.method = method;
     }
 
     /**
-     * @return the response
+     * Returns response
+     *
+     * @return response
      */
     public BasicHttpResponseHandler getResponse() {
         return response;
     }
 
     /**
-     * @param response the response to set
-     */
-    public void setResponse(BasicHttpResponseHandler response) {
-        this.response = response;
-    }
-
-    /**
-     * @return the responseTime
+     * Returns url response time.
+     *
+     * @return url response time
      */
     public long getResponseTime() {
         return responseTime;
-    }
-
-    /**
-     * @param responseTime the responseTime to set
-     */
-    public void setResponseTime(long responseTime) {
-        this.responseTime = responseTime;
     }
 }
