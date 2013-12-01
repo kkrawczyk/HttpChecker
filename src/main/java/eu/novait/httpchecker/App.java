@@ -15,6 +15,7 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.ParseException;
 
@@ -118,11 +119,11 @@ public class App {
             }
         }
     }
-    
-    public void exitWithNagiosCode(){
+
+    public void exitWithNagiosCode() {
         Iterator<CheckHandler> it = this.checkHandlers.iterator();
         int returnCode = App.STATUS_OK;
-        while(it.hasNext()){
+        while (it.hasNext()) {
             CheckHandler ch = it.next();
             if (ch.getStatusCode() < 200 || ch.getStatusCode() >= 400) {
                 returnCode = App.STATUS_CRITICAL;
@@ -147,6 +148,9 @@ public class App {
                     .hasArg()
                     .withDescription("URL filelist")
                     .create("f"));
+            options.addOption(
+                    OptionBuilder.withDescription("Print help")
+                    .create("h"));
             CommandLineParser parser = new BasicParser();
             CommandLine cmd = parser.parse(options, args);
             if (cmd.hasOption("u")) {
@@ -162,12 +166,13 @@ public class App {
                     app.addUrlToProcess(url);
                 }
             }
-
-            app.processUrls();
-            app.processOutput();
-
-            //HelpFormatter formatter = new HelpFormatter();
-            //formatter.printHelp("HTTPChecker", options);
+            if (cmd.hasOption("h")) {
+                HelpFormatter formatter = new HelpFormatter();
+                formatter.printHelp("java -jar HttpChecker.jar", options);
+            } else {
+                app.processUrls();
+                app.processOutput();
+            }
         } catch (ParseException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
