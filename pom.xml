@@ -65,7 +65,7 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>2.9.1</version>
                 <configuration>
-                    <reportOutputDirectory>${project.basedir}</reportOutputDirectory>
+                    <reportOutputDirectory>${project.basedir}/target</reportOutputDirectory>
                     <destDir>javadoc</destDir>
                     <show>public</show>
                 </configuration>

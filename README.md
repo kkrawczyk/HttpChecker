@@ -16,6 +16,12 @@ Above command produces target directory with two jars:
 *HttpChecker-<version>.jar jar without dependencies
 *HttpChecker-<version>-jar-with-dependencies.jar jar with dependencies
 
+To generate javadoc in target/javadoc use command:
+
+```bash
+mvn javadoc:aggregate
+```
+
 ##Basic usage
 HttpChecker in version 1.0 is compiled with NagiosOutputFormatter and acts as a nagios plugin. It can be executed with one url provided in command line or with url filelist (each url has to be in separate line).
 
