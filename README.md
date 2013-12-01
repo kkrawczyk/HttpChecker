@@ -13,8 +13,8 @@ mvn clean install assembly:single
 ```
 
 Above command produces target directory with two jars:
-*HttpChecker-[version].jar jar without dependencies
-*HttpChecker-[version]-jar-with-dependencies.jar jar with dependencies
+* HttpChecker-[version].jar jar without dependencies
+* HttpChecker-[version]-jar-with-dependencies.jar jar with dependencies
 
 To generate javadoc in target/javadoc use command:
 
