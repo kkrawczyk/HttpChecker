@@ -2,7 +2,7 @@
 
 ##Introduction
 
-Java application to checking website response status. It can format output in various ways (provided by OutputFormatters) so it can be used in example as Nagios plugin.
+Java application to checking website response status. It can format output in various ways (provided by OutputFormatters) so it can be used for example as Nagios plugin.
 
 ##Compiling and building jar package
 To compile sources you'll need installed java jdk 1.7 and maven2 on your system.
