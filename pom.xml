@@ -202,4 +202,18 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    
+    <distributionManagement>
+        <snapshotRepository>
+            <id>nova</id>
+            <url>http://nova-it.eu:8181/nexus/content/repositories/nova</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </snapshotRepository>
+        <repository>
+            <id>nova-release</id>
+            <url>http://nova-it.eu:8181/nexus/content/repositories/nova-release</url>
+        </repository>
+    </distributionManagement>
 </project>
