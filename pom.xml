@@ -4,11 +4,27 @@
 
     <groupId>eu.novait</groupId>
     <artifactId>HttpChecker</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.0.4-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>HttpChecker</name>
     <url>http://maven.apache.org</url>
+    
+    
+    <distributionManagement>
+        <snapshotRepository>
+            <id>nova</id>
+            <url>http://nova-it.eu:8181/nexus/content/repositories/nova</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </snapshotRepository>
+        <repository>
+            <id>nova-release</id>
+            <url>http://nova-it.eu:8181/nexus/content/repositories/nova-release</url>
+        </repository>
+    </distributionManagement>
+    
     
     <scm>
         <connection>scm:git:https://github.com/kkrawczyk/HttpChecker.git</connection>
